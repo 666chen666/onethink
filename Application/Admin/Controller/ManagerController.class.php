@@ -1,0 +1,90 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Administrator
+ * Date: 2017/4/26 0026
+ * Time: 下午 12:01
+ */
+
+namespace Admin\Controller;
+
+
+class ManagerController extends AdminController
+{
+    public function index(){
+        /* 获取频道列表 */
+        $list = M('repair')->select();
+        $this->assign('list', $list);
+        $this->meta_title = '报修管理';
+        $this->display();
+    }
+    public function add(){
+            if(IS_POST){
+                $Channel = D('repair');
+                $data = $Channel->create();
+                if($data){
+                    $Channel->time=time();
+                    $Channel->sn=rand(1000,9999);
+                    $id = $Channel->add();
+                    if($id){
+                        $this->success('新增成功', U('index'));
+                        //记录行为
+                        action_log('update_repair', 'repair', $id, UID);
+                    } else {
+                        $this->error('新增失败');
+                    }
+                } else {
+                    $this->error($Channel->getError());
+                }
+            } else {
+                $this->assign('info',null);
+                $this->meta_title = '新增报修';
+                $this->display('edit');
+            }
+    }
+    public function edit($id = 0){
+        if(IS_POST){
+            $Channel = D('repair');
+            $data = $Channel->create();
+            if($data){
+                if($Channel->save()){
+                    //记录行为
+                    action_log('update_repair', 'repair', $data['id'], UID);
+                    $this->success('编辑成功', U('index'));
+                } else {
+                    $this->error('编辑失败');
+                }
+
+            } else {
+                $this->error($Channel->getError());
+            }
+        } else {
+            $info = array();
+            /* 获取数据 */
+            $info = M('repair')->find($id);
+
+            if(false === $info){
+                $this->error('获取配置信息错误');
+            }
+            $this->assign('info', $info);
+            $this->meta_title = '编辑导航';
+            $this->display();
+        }
+    }
+    public function del(){
+        $id = array_unique((array)I('id',0));
+
+        if ( empty($id) ) {
+            $this->error('请选择要操作的数据!');
+        }
+
+        $map = array('id' => array('in', $id) );
+        if(M('repair')->where($map)->delete()){
+            //记录行为
+            action_log('update_repair', 'repair', $id, UID);
+            $this->success('删除成功');
+        } else {
+            $this->error('删除失败！');
+        }
+    }
+}
