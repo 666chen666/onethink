@@ -98,32 +98,32 @@
 	<div class="data-table table-striped">
 		<table>
 			<thead>
-				<tr>
-					<th class="row-selected">
-						<input class="checkbox check-all" type="checkbox">
-					</th>
-					<th>ID</th>
-					<th>报修单号</th>
-					<th>报修人</th>
-                    <th>电话</th>
-                    <th>地址</th>
-                    <th>问题</th>
-                    <th>保修时间</th>
-                    <th>状态</th>
-					<th>操作</th>
-				</tr>
+			<tr>
+				<th class="row-selected">
+					<input class="checkbox check-all" type="checkbox">
+				</th>
+				<th>ID</th>
+				<th>报修单号989</th>
+				<th>报修人</th>
+				<th>电话</th>
+				<th>地址</th>
+				<th>问题</th>
+				<th>保修时间</th>
+				<th>状态</th>
+				<th>操作</th>
+			</tr>
 			</thead>
 			<tbody>
-				<?php if(!empty($list)): if(is_array($list)): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$channel): $mod = ($i % 2 );++$i;?><tr>
+			<?php if(!empty($list)): if(is_array($list)): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$channel): $mod = ($i % 2 );++$i;?><tr>
 						<td><input class="ids row-selected" type="checkbox" name="" id="" value="<?php echo ($channel['id']); ?>"> </td>
 						<td><?php echo ($channel["id"]); ?></td>
 						<td><?php echo ($channel["sn"]); ?></td>
 						<td><?php echo ($channel["name"]); ?></td>
-                        <td><?php echo ($channel["tel"]); ?></td>
-                        <td><?php echo ($channel["address"]); ?></td>
-                        <td><?php echo ($channel["problem"]); ?></td>
-                        <td><?php echo (date('Y-m-d',$channel["time"])); ?></td>
-                        <td><?php echo ($channel[status]?'正在处理':'处理完成'); ?></td>
+						<td><?php echo ($channel["tel"]); ?></td>
+						<td><?php echo ($channel["address"]); ?></td>
+						<td><?php echo ($channel["problem"]); ?></td>
+						<td><?php echo (date('Y-m-d',$channel["time"])); ?></td>
+						<td><?php echo ($channel[status]?'正在处理':'处理完成'); ?></td>
 						<td>
 							<a title="编辑" href="<?php echo U('edit?id='.$channel['id'].'&pid='.$pid);?>">编辑</a>
 							<a href="<?php echo U('setStatus?ids='.$channel['id'].'&status='.abs(1-$channel['status']));?>" class="ajax-get"><?php echo (show_status_op($channel["status"])); ?></a>
@@ -133,7 +133,11 @@
 				<?php else: ?>
 				<td colspan="6" class="text-center"> aOh! 暂时还没有内容! </td><?php endif; ?>
 			</tbody>
+
 		</table>
+	</div>
+	<div class="page">
+		<?php echo ($page); ?>
 	</div>
 
         </div>
@@ -229,27 +233,27 @@
         }();
     </script>
     
-<script type="text/javascript">
-    $(function() {
-    	//点击排序
-    	$('.list_sort').click(function(){
-    		var url = $(this).attr('url');
-    		var ids = $('.ids:checked');
-    		var param = '';
-    		if(ids.length > 0){
-    			var str = new Array();
-    			ids.each(function(){
-    				str.push($(this).val());
-    			});
-    			param = str.join(',');
-    		}
+	<script type="text/javascript">
+		$(function() {
+			//点击排序
+			$('.list_sort').click(function(){
+				var url = $(this).attr('url');
+				var ids = $('.ids:checked');
+				var param = '';
+				if(ids.length > 0){
+					var str = new Array();
+					ids.each(function(){
+						str.push($(this).val());
+					});
+					param = str.join(',');
+				}
 
-    		if(url != undefined && url != ''){
-    			window.location.href = url + '/ids/' + param;
-    		}
-    	});
-    });
-</script>
+				if(url != undefined && url != ''){
+					window.location.href = url + '/ids/' + param;
+				}
+			});
+		});
+	</script>
 
 </body>
 </html>

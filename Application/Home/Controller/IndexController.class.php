@@ -29,5 +29,20 @@ class IndexController extends HomeController {
                  
         $this->display();
     }
-
+    public function notice(){
+        $notices = D('Document')->select();
+        foreach($notices as $k=>$cov){
+            $res=D('Picture')->where(['id'=>$cov['cover_id']])->select();
+            $notices[$k]['path']=$res[0]['path'];
+        }
+        $this->assign('notices',$notices);
+        $this->display();
+    }
+    public function detail($id){
+        $detail=D('Document')->where(['id'=>$id])->find();
+        $content=D('Document_article')->find($detail['id']);
+        $detail['content']=$content['content'];
+        $this->assign('detail',$detail);
+        $this->display();
+    }
 }

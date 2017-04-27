@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Administrator
- * Date: 2017/4/26 0026
- * Time: 下午 12:01
- */
-
 namespace Admin\Controller;
 
 
@@ -13,10 +6,14 @@ class ManagerController extends AdminController
 {
     public function index(){
         /* 获取频道列表 */
-        $list = M('repair')->select();
+        $repair = M('repair');
+        $count = $repair->count();
+        $page = new \Think\Page($count,2);
+        $list = M('repair')->limit($page->firstRow.','.$page->listRows)->select();
+        $this->assign('page',$page->show());
         $this->assign('list', $list);
         $this->meta_title = '报修管理';
-        $this->display();
+        $this->display('index');
     }
     public function add(){
             if(IS_POST){
