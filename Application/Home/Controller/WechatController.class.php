@@ -44,7 +44,7 @@ class WechatController extends HomeController
                         "type" => "view",
                         "name" => "物业管理",
                         "url"  => U('home/index/index','','',true)
-                    ],
+                    ],     
                 ],
             ],
         ];
