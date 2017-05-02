@@ -95,5 +95,64 @@ return array(
         'hash'     => true, //是否生成hash编码
         'callback' => false, //检测文件是否存在回调函数，如果存在返回文件信息数组
     ), //附件上传配置（文件上传类配置）
-
+    'wechat'=>array(
+        /**
+         * Debug 模式，bool 值：true/false
+         *
+         * 当值为 false 时，所有的日志都不会记录
+         */
+        'debug'  => false,
+        /**
+         * 账号基本信息，请从微信公众平台/开放平台获取
+         */
+        'app_id'  => 'wx3cd39fc4ef86b131',         // AppID
+        'secret'  => 'b2e61796b40e0fcfb1bd01fafcd9d85f',     // AppSecret
+        'token'   => 'energy',          // Token
+        'aes_key' => 'energy',                    // EncodingAESKey，安全模式下请一定要填写！！！
+        /**
+         * 日志配置
+         *
+         * level: 日志级别, 可选为：
+         *         debug/info/notice/warning/error/critical/alert/emergency
+         * permission：日志文件权限(可选)，默认为null（若为null值,monolog会取0644）
+         * file：日志文件位置(绝对路径!!!)，要求可写权限
+         */
+        'log' => array(
+            'level'      => 'debug',
+            'permission' => 0777,
+            'file'       => '/tmp/easywechat.log',
+        ),
+        /**
+         * OAuth 配置
+         *
+         * scopes：公众平台（snsapi_userinfo / snsapi_base），开放平台：snsapi_login
+         * callback：OAuth授权完成后的回调页地址
+         */
+        'oauth' => array(
+            'scopes'   => ['snsapi_base'],
+            'callback' => '/wechat/callback',
+        ),
+        /**
+         * 微信支付
+         */
+        'payment' => array(
+            'merchant_id'        => 'your-mch-id',
+            'key'                => 'key-for-signature',
+            'cert_path'          => 'path/to/your/cert.pem', // XXX: 绝对路径！！！！
+            'key_path'           => 'path/to/your/key',      // XXX: 绝对路径！！！！
+            // 'device_info'     => '013467007045764',
+            // 'sub_app_id'      => '',
+            // 'sub_merchant_id' => '',
+            // ...
+        ),
+        /**
+         * Guzzle 全局设置
+         *
+         * 更多请参考： http://docs.guzzlephp.org/en/latest/request-options.html
+         */
+        'guzzle' => array(
+            'timeout' => 3.0, // 超时时间（秒）
+            //'verify' => false, // 关掉 SSL 认证（强烈不建议！！！）
+        ),
+    )
 );

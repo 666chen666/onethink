@@ -43,7 +43,8 @@
     </nav>
     <!--导航结束-->
 
-    <div class="container-fluid">
+    <div class="container-fluid" >
+        <div id="box">
         <?php if(is_array($notices)): $i = 0; $__LIST__ = $notices;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$notice): $mod = ($i % 2 );++$i;?><div class="row noticeList">
             <a href="<?php echo U('Home/Index/detail?id='.$notice['id']);?>">
                 <div class="col-xs-2">
@@ -56,11 +57,45 @@
                 </div>
             </a>
         </div><?php endforeach; endif; else: echo "" ;endif; ?>
+        </div>
+    </div>
+    <div class="text-center">
+        <input type="button" class="btn btn-info get_more" value="获取更多！~~~">
     </div>
 </div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="/Public/Home/style/jquery-1.11.2.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="/Public/Home/style/bootstrap/js/bootstrap.min.js"></script>
+<script>
+    $(function(){
+        var p = 1;
+        $(".get_more").click(function(){
+            $.post("<?php echo U('index/notice');?>",{p:p+1},function(data){
+                if(data.status == 1){
+                    p++;
+                    var html = '';
+                    $(data.info).each(function(i,e){
+                        html += '<div class="row noticeList">\
+                                    <a href="'+ e.url +'">\
+                                    <div class="col-xs-2">\
+                                    <img class="noticeImg" src="'+ e.path +'" />\
+                                    </div>\
+                                    <div class="col-xs-10">\
+                                    <p class="title">'+ e.title +'</p>\
+                            <p class="intro">'+ e.description +'</p>\
+                            <p class="info">浏览:'+ e.view+' <span class="pull-right">'+ e.create_time +'</span> </p>\
+                                </div>\
+                                </a>\
+                                </div>' ;
+                    });
+                    $('#box').append(html);
+                }else {
+                    $(".get_more").remove();
+                }
+            });
+        });
+    });
+</script>
 </body>
 </html>

@@ -30,10 +30,20 @@ class IndexController extends HomeController {
         $this->display();
     }
     public function notice(){
-        $notices = D('Document')->select();
-        foreach($notices as $k=>$cov){
-            $res=D('Picture')->where(['id'=>$cov['cover_id']])->select();
-            $notices[$k]['path']=$res[0]['path'];
+        $document = D("Document");
+        $notices = $document->where(['category_id'=>40])->page(I('p',1),C('LIST_ROWS'))->select();
+        foreach($notices as &$v){
+            $v['create_time'] = date('Y-m-d H:i',$v['create_time']);
+            $v['path'] = get_cover($v['cover_id'],"path");
+            $v['url'] = U('detail',['id'=>$v['id']]);
+        }
+
+        if(IS_AJAX){//判断是否是ajax请求
+            if(empty($notices)){
+                $this->error('没有数据');
+            }else{
+                $this->success($notices);
+            }
         }
         $this->assign('notices',$notices);
         $this->display();
@@ -43,6 +53,71 @@ class IndexController extends HomeController {
         $content=D('Document_article')->find($detail['id']);
         $detail['content']=$content['content'];
         $this->assign('detail',$detail);
+        $this->display();
+    }
+    public function shop(){
+        $document = D("Document");
+        $shops = $document->where(['category_id'=>41])->page(I('p',1),C('LIST_ROWS'))->select();
+        foreach($shops as &$v){
+            $v['create_time'] = date('Y-m-d H:i',$v['create_time']);
+            $v['path'] = get_cover($v['cover_id'],"path");
+            $v['url'] = U('detail',['id'=>$v['id']]);
+        }
+
+        if(IS_AJAX){//判断是否是ajax请求
+            if(empty($shops)){
+                $this->error('没有数据');
+            }else{
+                $this->success($shops);
+            }
+        }
+        $this->assign('shops',$shops);
+        $this->display();
+    }
+    public function activity(){
+        $document = D("Document");
+        $activitys = $document->where(['category_id'=>42])->page(I('p',1),C('LIST_ROWS'))->select();
+        foreach($activitys as &$v){
+            $v['create_time'] = date('Y-m-d H:i',$v['create_time']);
+            $v['path'] = get_cover($v['cover_id'],"path");
+            $v['url'] = U('detail',['id'=>$v['id']]);
+        }
+
+        if(IS_AJAX){//判断是否是ajax请求
+            if(empty($activitys)){
+                $this->error('没有数据');
+            }else{
+                $this->success($activitys);
+            }
+        }
+        $this->assign('activitys',$activitys);
+        $this->display();
+    }
+
+    public function joining(){
+        if(!$this->login()){
+            $id=I('id');
+            $user = session('user_auth');
+            $activity= D('Activity');
+            $activity->aid=$id;
+            $activity->uid=$user['uid'];
+            $count=$activity->where(['aid'=>$id],'uid='.$user['uid'])->count();
+            if($count){
+                return '111';
+            }
+            if($activity->add()){
+                $data=[
+                    'success'=>'true',
+                    'msg'=>'添加成功',
+                ];
+                $this->success($data);
+            }
+        }
+    }
+    public function my(){
+        $this->display();
+    }
+    public function fuwu(){
         $this->display();
     }
 }
