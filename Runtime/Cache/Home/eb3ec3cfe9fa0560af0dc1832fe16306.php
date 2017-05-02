@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8">
@@ -8,8 +8,8 @@
     <title>在线报修</title>
 
     <!-- Bootstrap -->
-    <link href="__STYLE__/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="__STYLE__/css/style.css" rel="stylesheet">
+    <link href="/Public/Home/style/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/Public/Home/style/css/style.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -76,8 +76,8 @@
     </div>
 </div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="__STYLE__/jquery-1.11.2.min.js"></script>
+<script src="/Public/Home/style/jquery-1.11.2.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="__STYLE__/bootstrap/js/bootstrap.min.js"></script>
+<script src="/Public/Home/style/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>

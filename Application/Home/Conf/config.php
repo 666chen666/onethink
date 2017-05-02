@@ -130,7 +130,7 @@ return array(
          */
         'oauth' => array(
             'scopes'   => ['snsapi_base'],
-            'callback' => '/wechat/callback',
+            'callback' => 'onethink1/onethink/Home/wechat/callback',
         ),
         /**
          * 微信支付

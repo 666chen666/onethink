@@ -2,6 +2,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title><?php echo C('WEB_SITE_TITLE');?></title>
 <link href="/Public/static/bootstrap/css/bootstrap.css" rel="stylesheet">
 <link href="/Public/static/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
@@ -83,45 +84,43 @@
     <div class="row">
          
         
-<section>
-	<div class="span12">
-        <form class="login-form" action="/index.php?s=/Home/User/login.html" method="post">
-          <div class="control-group">
-            <label class="control-label" for="inputEmail">用户名</label>
-            <div class="controls">
-              <input type="text" id="inputEmail" class="span3" placeholder="请输入用户名"  ajaxurl="/member/checkUserNameUnique.html" errormsg="请填写1-16位用户名" nullmsg="请填写用户名" datatype="*1-16" value="" name="username">
+    <div class="content-fluid">
+        <form class="login-form" action="" method="post">
+            <div class="control-group">
+                <label class="control-label" for="inputEmail">用户名</label>
+                <div class="controls">
+                    <input type="text" id="inputEmail" class="span3" placeholder="请输入用户名"  ajaxurl="/member/checkUserNameUnique.html" errormsg="请填写1-16位用户名" nullmsg="请填写用户名" datatype="*1-16" value="" name="username">
+                </div>
             </div>
-          </div>
-          <div class="control-group">
-            <label class="control-label" for="inputPassword">密码</label>
-            <div class="controls">
-              <input type="password" id="inputPassword"  class="span3" placeholder="请输入密码"  errormsg="密码为6-20位" nullmsg="请填写密码" datatype="*6-20" name="password">
+            <div class="control-group">
+                <label class="control-label" for="inputPassword">密码</label>
+                <div class="controls">
+                    <input type="password" id="inputPassword"  class="span3" placeholder="请输入密码"  errormsg="密码为6-20位" nullmsg="请填写密码" datatype="*6-20" name="password">
+                </div>
             </div>
-          </div>
-          <div class="control-group">
-            <label class="control-label" for="inputPassword">验证码</label>
-            <div class="controls">
-              <input type="text" id="inputPassword" class="span3" placeholder="请输入验证码"  errormsg="请填写5位验证码" nullmsg="请填写验证码" datatype="*5-5" name="verify">
+            <div class="control-group">
+                <label class="control-label" for="inputPassword">验证码</label>
+                <div class="controls">
+                    <input type="text" id="inputPassword" class="span3" placeholder="请输入验证码"  errormsg="请填写5位验证码" nullmsg="请填写验证码" datatype="*5-5" name="verify">
+                </div>
             </div>
-          </div>
-          <div class="control-group">
-            <label class="control-label"></label>
-            <div class="controls">
-                <img class="verifyimg reloadverify" alt="点击切换" src="<?php echo U('verify');?>" style="cursor:pointer;">
+            <div class="control-group">
+                <label class="control-label"></label>
+                <div class="controls">
+                    <img class="verifyimg reloadverify" alt="点击切换" src="<?php echo U('verify');?>" style="cursor:pointer;">
+                </div>
+                <div class="controls Validform_checktip text-warning"></div>
             </div>
-            <div class="controls Validform_checktip text-warning"></div>
-          </div>
-          <div class="control-group">
-            <div class="controls">
-              <label class="checkbox">
-                <input type="checkbox"> 自动登陆
-              </label>
-              <button type="submit" class="btn">登 陆</button>
+            <div class="control-group">
+                <div class="controls">
+                    <label class="checkbox">
+                        <input type="checkbox"> 自动登陆
+                    </label>
+                    <button type="submit" class="btn">登 陆</button>
+                </div>
             </div>
-          </div>
         </form>
-	</div>
-</section>
+    </div>
 
     </div>
 </div>
