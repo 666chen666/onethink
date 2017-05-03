@@ -52,7 +52,8 @@
             <div class="col-xs-9">
                 <?php echo ($member['nickname']); ?><br/>
                 天府新谷1号楼<br/>
-                积分:<span class="text-danger"><?php echo ($member['score']); ?></span>
+                积分:<span class="text-danger jifen"><?php echo ($member['score']); ?></span>
+                <span><a href="javascript:;" class="btn btn-info qiandao">签到</a></span>
             </div>
         </div>
         <div class="blank"></div>
@@ -76,4 +77,16 @@
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="/Public/Home/style/bootstrap/js/bootstrap.min.js"></script>
 </body>
+<script>
+    $('.qiandao').click(function () {
+        $.post("<?php echo U('index/qiandao');?>",{},function(data){
+            if(data.status==1){
+                alert('签到成功');
+                $('.jifen').text(data.info);
+            }else{
+                alert(data.info);
+            }
+        })
+    })
+</script>
 </html>

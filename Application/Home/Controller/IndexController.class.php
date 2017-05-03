@@ -144,4 +144,19 @@ class IndexController extends HomeController {
         $this->assign('detail',$detail);
         $this->display('zushou-detail');
     }
+    public function qiandao(){
+        $user = session('user_auth');
+        $id=$user['uid'];
+        $member=M('Member');
+        $res=$member->where(['id'=>$id,'last_qiandao'=>date('Ymd',time())])->find();
+        if(!$res){
+            $us=$member->where(['id'=>$id])->find();
+            $data['last_qiandao']=date('Ymd',time());
+            $data['score']=$us['score']+10;
+            $member->where(['id'=>$id])->setfield(['last_qiandao'=>$data['last_qiandao'],'score'=>$data['score']]);
+            $this->success($data['score']);
+        }else{
+            $this->error('今天已经签到了');
+        }
+    }
 }
