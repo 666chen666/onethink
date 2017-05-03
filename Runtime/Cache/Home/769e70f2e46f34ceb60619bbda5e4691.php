@@ -83,7 +83,7 @@
                     </a>
                 </div>
                 <div class="col-xs-4">
-                    <a href="zushou.html">
+                    <a href="<?php echo U('zushou');?>">
                     <div class="indexLabel label-primary">
                     <span class="glyphicon glyphicon-usd"></span><br/>
                     小区租售

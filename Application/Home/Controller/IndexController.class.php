@@ -120,4 +120,15 @@ class IndexController extends HomeController {
     public function fuwu(){
         $this->display();
     }
+    public function zushou(){
+        $document = M('Document');
+        $zus=$document->where('category_id=43')->select();
+        foreach($zus as &$v){
+            $v['create_time'] = date('Y-m-d H:i',$v['create_time']);
+            $v['path'] = get_cover($v['cover_id'],"path");
+            $v['url'] = U('detail',['id'=>$v['id']]);
+        }
+        $this->assign('zus',$zus);
+        $this->display();
+    }
 }

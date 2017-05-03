@@ -84,4 +84,7 @@ class ManagerController extends AdminController
             $this->error('删除失败！');
         }
     }
+    public function about(){
+        $this->display();
+    }
 }

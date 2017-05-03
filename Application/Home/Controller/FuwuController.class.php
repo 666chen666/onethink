@@ -20,13 +20,21 @@ class FuwuController extends HomeController
                 $data=I('post.');
                 $user=session('user_auth');
                 $data['aid']=$user['uid'];
-                $res=$identity->add($data);
-                if($res){
+                $data=$identity->create($data);
+                //var_dump($data);exit;
+                if($data){
+                    $identity->add($data);
                     $this->redirect('index/index');
+                }else{
+
                 }
                 $this->redirect('Fuwu/index');
             }
             $this->display();
         }
     }
+    public function tips(){
+
+    }
+
 }
