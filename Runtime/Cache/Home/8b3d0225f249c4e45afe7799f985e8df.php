@@ -50,9 +50,9 @@
                 <img src="/Public/Home/style/image/5.png" width="60" height="60" />
             </div>
             <div class="col-xs-9">
-                ZhangSan<br/>
-                北大花园小区<br/>
-                积分:<span class="text-danger">100</span>
+                <?php echo ($member['nickname']); ?><br/>
+                天府新谷1号楼<br/>
+                积分:<span class="text-danger"><?php echo ($member['score']); ?></span>
             </div>
         </div>
         <div class="blank"></div>

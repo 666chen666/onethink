@@ -115,7 +115,13 @@ class IndexController extends HomeController {
         }
     }
     public function my(){
-        $this->display();
+        if(!$this->login()){
+            $member=M('Member');
+            $user = session('user_auth');
+            $member=$member->find(['id'=>$user['uid']]);
+            $this->assign('member',$member);
+            $this->display();
+        }
     }
     public function fuwu(){
         $this->display();
@@ -130,5 +136,12 @@ class IndexController extends HomeController {
         }
         $this->assign('zus',$zus);
         $this->display();
+    }
+    public function zushou_detail($id){
+        $detail=D('Document')->where(['id'=>$id])->find();
+        $content=D('Document_article')->find($detail['id']);
+        $detail['content']=$content['content'];
+        $this->assign('detail',$detail);
+        $this->display('zushou-detail');
     }
 }
